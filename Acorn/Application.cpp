@@ -89,5 +89,6 @@ void Application::draw()
 {
 	SDL_UpdateWindowSurface(m_window);
 	SDL_FillRect(m_window_surface, NULL, SDL_MapRGB(m_window_surface->format, 0, 0, 0));
+	this->world.draw_current_room(this->m_window_surface);
 	//this->chessWindow->draw(m_window_surface);
 }

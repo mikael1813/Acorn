@@ -1,5 +1,7 @@
 #pragma once
+
 #include <SDL.h>
+#include "string"
 
 class Acorn {
 private:
@@ -7,4 +9,5 @@ private:
 	SDL_Surface* m_avatar;
 public:
 	Acorn();
+	void draw(SDL_Surface* window_surface);
 };

@@ -8,4 +8,5 @@ World::World() {
 
 void World::draw_current_room(SDL_Surface* window_surface) {
 	m_current_room.draw(window_surface);
+	m_player.draw(window_surface);
 }

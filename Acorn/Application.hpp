@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <iostream>
+#include "World.hpp"
 
 class Application
 {
@@ -18,4 +19,5 @@ private:
 	SDL_Event m_window_event;
 	int m_resolution_width = 1280;
 	int m_resolution_height = 720;
+	World world;
 };

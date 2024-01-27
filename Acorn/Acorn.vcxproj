@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Acorn.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="World.cpp" />
@@ -28,6 +29,7 @@
   <ItemGroup>
     <ClInclude Include="Acorn.hpp" />
     <ClInclude Include="Application.hpp" />
+    <ClInclude Include="FileLoader.hpp" />
     <ClInclude Include="Room.hpp" />
     <ClInclude Include="World.hpp" />
   </ItemGroup>
