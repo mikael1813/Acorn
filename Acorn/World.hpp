@@ -10,5 +10,6 @@ private:
 public:
 	World();
 	void draw_current_room(SDL_Surface* m_window_surface);
+	void move_player(int x, int y);
 
 };

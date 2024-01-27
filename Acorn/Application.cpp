@@ -55,6 +55,11 @@ void Application::loop()
 					//this->chessWindow->releaseLeftClick();
 				}
 				break;
+			case SDL_KEYDOWN:
+				keyboardPress(m_window_event.key);
+				break;
+			case SDL_KEYUP:
+				break;
 			}
 			switch (m_window_event.window.event) {
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
@@ -83,6 +88,17 @@ void Application::mousePress(SDL_MouseButtonEvent& b) {
 			int x = b.x;
 			int y = b.y;
 		}
+}
+
+void Application::keyboardPress(SDL_KeyboardEvent& key) {
+	switch (key.keysym.sym) {
+	case SDLK_a:
+		this->world.move_player(-1, 0);
+		break;
+	case SDLK_d:
+		this->world.move_player(1, 0);
+		break;
+	}
 }
 
 void Application::draw()
