@@ -13,6 +13,7 @@ public:
 	void loop();
 	void draw();
 	void mousePress(SDL_MouseButtonEvent& b);
+	void keyboardPress(SDL_KeyboardEvent& key);
 private:
 	SDL_Window* m_window;
 	SDL_Surface* m_window_surface;

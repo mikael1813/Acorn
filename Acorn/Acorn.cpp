@@ -12,3 +12,8 @@ Acorn::Acorn() {
 void Acorn::draw(SDL_Surface* window_surface) {
 	SDL_BlitScaled(this->m_avatar, NULL, window_surface, &this->m_player_position);
 }
+
+void Acorn::move(int x, int y) {
+	m_player_position.x = m_player_position.x + x * m_player_speed;
+	m_player_position.y = m_player_position.y + y * m_player_speed;
+}
