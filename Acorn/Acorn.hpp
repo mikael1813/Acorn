@@ -7,4 +7,4 @@ private:
 	SDL_Surface* m_avatar;
 public:
 	Acorn();
-};
+};//cum sa nu
