@@ -1,7 +1,2 @@
-﻿  Acorn.cpp
-  Application.cpp
-  main.cpp
-  Room.cpp
-  World.cpp
-  Generating Code...
+﻿  main.cpp
   Acorn.vcxproj -> D:\Acorn\Acorn\x64\Debug\Acorn.exe
