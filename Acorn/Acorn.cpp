@@ -1,6 +1,6 @@
 #include "Acorn.hpp"
-#include <SDL.h>
 
 Acorn::Acorn() {
-	SDL_Rect m_player_position;
+	m_player_position.x = 1280 / 2;
+	m_player_position.y = 40;
 }

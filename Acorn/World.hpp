@@ -5,7 +5,7 @@
 class World {
 private:
 	// graph of rooms
-	Room current_room;
+	Room m_current_room;
 	SDL_Surface* m_window_surface;
 public:
 	World(SDL_Surface* m_window_surface);

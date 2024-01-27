@@ -1,8 +1,9 @@
 #pragma once
+#include <SDL.h>
 
 class Acorn {
 private:
-	int position_x, position_y;
+	SDL_Rect m_player_position;
 	SDL_Surface* m_avatar;
 public:
 	Acorn();

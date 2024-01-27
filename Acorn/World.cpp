@@ -6,6 +6,6 @@ World::World(SDL_Surface* m_window_surface) {
 }
 
 void World::draw_current_room() {
-	current_room = Room();
-	current_room.draw(m_window_surface);
+	m_current_room = Room();
+	m_current_room.draw(m_window_surface);
 }
