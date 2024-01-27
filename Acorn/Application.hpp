@@ -16,4 +16,6 @@ private:
 	SDL_Window* m_window;
 	SDL_Surface* m_window_surface;
 	SDL_Event m_window_event;
+	int m_resolution_width = 1280;
+	int m_resolution_height = 720;
 };

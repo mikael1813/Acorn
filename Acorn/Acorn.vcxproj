@@ -31,6 +31,10 @@
     <ClInclude Include="Room.hpp" />
     <ClInclude Include="World.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Images\copac.bmp" />
+    <Image Include="..\Images\ghinda.bmp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

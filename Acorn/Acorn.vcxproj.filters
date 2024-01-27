@@ -48,4 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Images\copac.bmp">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="..\Images\ghinda.bmp">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

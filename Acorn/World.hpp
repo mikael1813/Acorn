@@ -6,9 +6,9 @@ class World {
 private:
 	// graph of rooms
 	Room m_current_room;
-	SDL_Surface* m_window_surface;
+	Acorn m_player;
 public:
-	World(SDL_Surface* m_window_surface);
-	void draw_current_room();
+	World();
+	void draw_current_room(SDL_Surface* m_window_surface);
 
 };
