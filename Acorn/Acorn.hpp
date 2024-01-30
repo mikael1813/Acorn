@@ -1,15 +1,22 @@
 #pragma once
 
 #include <SDL.h>
-#include "string"
+#include "Character.hpp"
+#include "Animation.hpp"
+#include "RigidBody.hpp"
 
-class Acorn {
-private:
-	SDL_Rect m_player_position;
-	SDL_Surface* m_avatar;
-	int m_player_speed = 2;
+class Acorn : public Character{
 public:
-	Acorn();
-	void draw(SDL_Surface* window_surface);
-	void move(int x, int y);
+	Acorn(Properties* props);
+
+	virtual void Draw();
+	virtual void Update(float dt);
+	virtual void Clean();
+
+private:
+	/*int m_Row, m_Frame, m_FrameCount;
+	int m_AnimationSpeed;*/
+
+	Animation* m_Animation;
+	RigidBody* m_RigidBody;
 };

@@ -2,6 +2,7 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include "Acorn.hpp"
 
 constexpr int SCREEN_WIDTH = 1280;
 constexpr int SCREEN_HEIGHT = 720;
@@ -34,4 +35,6 @@ private:
 	SDL_Window* m_Window;
 	SDL_Renderer* m_Renderer;
 	static Engine* s_Instance;
+
+	Acorn* player;
 };

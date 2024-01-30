@@ -20,26 +20,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Acorn.cpp" />
-    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Room.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acorn.hpp" />
-    <ClInclude Include="Application.hpp" />
+    <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="Character.hpp" />
     <ClInclude Include="Engine.hpp" />
-    <ClInclude Include="FileLoader.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="IObject.hpp" />
-    <ClInclude Include="Room.hpp" />
+    <ClInclude Include="RigidBody.hpp" />
     <ClInclude Include="TextureManager.hpp" />
     <ClInclude Include="Transform.hpp" />
     <ClInclude Include="Vector2D.hpp" />
-    <ClInclude Include="World.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Images\copac.bmp" />

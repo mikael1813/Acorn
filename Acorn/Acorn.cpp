@@ -1,19 +1,33 @@
 #include "Acorn.hpp"
-#include "FileLoader.hpp"
+#include "TextureManager.hpp"
+#include "SDL.h"
 
-Acorn::Acorn() {
-	m_player_position.x = 1280 / 2;
-	m_player_position.y = 520;
-	m_player_position.w = 300;
-	m_player_position.h = 400;
-	m_avatar = load_surface("../Images/ghinda.bmp");
+
+Acorn::Acorn(Properties* props) : Character(props)
+{
+	m_RigidBody = new RigidBody();
+	m_Animation = new Animation();
+	m_Animation->SetProps(m_TextureID, 0, 5, 300, SDL_FLIP_HORIZONTAL);
 }
 
-void Acorn::draw(SDL_Surface* window_surface) {
-	SDL_BlitScaled(this->m_avatar, NULL, window_surface, &this->m_player_position);
+void Acorn::Draw()
+{
+	m_Animation->Draw(m_Transform->X, m_Transform->Y, m_Width, m_Height);
 }
 
-void Acorn::move(int x, int y) {
-	m_player_position.x = m_player_position.x + x * m_player_speed;
-	m_player_position.y = m_player_position.y + y * m_player_speed;
+void Acorn::Update(float dt)
+{
+	m_RigidBody->Update(dt);
+	//m_RigidBody->ApplyForceX(3);
+
+	m_Transform->TranslateX(m_RigidBody->GetPosition().X);
+	m_Transform->TranslateY(m_RigidBody->GetPosition().Y);
+
+
+	m_Animation->Update();
+}
+
+void Acorn::Clean()
+{
+	TextureManager::GetInstance()->Clean();
 }

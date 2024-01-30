@@ -38,7 +38,8 @@ bool Engine::Init()
 		return false;
 	}
 
-	TextureManager::GetInstance()->Load("tree", "../Images/copac.png");
+	TextureManager::GetInstance()->Load("acorn", "../Images/ghinda_radu.png");
+	player = new Acorn(new Properties("acorn", 200, 200, 32, 32));
 
 	/*Vector2D v1(1, 1), v2(2, -1), v3;
 	v3 = v1 + v2;
@@ -68,7 +69,7 @@ void Engine::Quit()
 
 void Engine::Update(float dt)
 {
-	//std::cout << "OOF";
+	player->Update(0.1);
 }
 
 void Engine::Render()
@@ -76,7 +77,8 @@ void Engine::Render()
 	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_Renderer);
 
-	TextureManager::GetInstance()->Draw("tree", 0, 0, 1280, 720);
+	player->Draw();
+	//TextureManager::GetInstance()->Draw("tree", 0, 0, 1280, 720);
 	SDL_RenderPresent(m_Renderer);
 }
 
