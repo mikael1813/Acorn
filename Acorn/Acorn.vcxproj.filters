@@ -16,41 +16,92 @@
     <Filter Include="Resource Files\Images">
       <UniqueIdentifier>{27f70f59-80cb-4284-8468-5b5e05cd32ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{973b0f61-1e4c-4038-88f3-1f54faa7f6f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{f5c98b6e-fd24-43fd-adaa-79cbb5551050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{c2a0c4aa-a24b-42d5-9b90-d54518caeadf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{e6869f5a-1d54-4dba-862c-ef4400e19e9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Old">
+      <UniqueIdentifier>{d7ac4efc-6b23-472b-a717-eae6d93e3f60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Old">
+      <UniqueIdentifier>{4f009aff-f03d-49aa-bbbd-7f5d8043622a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{beb18009-0868-4ff6-a700-45eff69ffc82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{dfa0e356-8e3e-4aad-9f12-d87fc2476635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object">
+      <UniqueIdentifier>{c807c49f-8532-4160-8441-8c654c3d371a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Acorn.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Old</Filter>
     </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files\Old</Filter>
     </ClCompile>
     <ClCompile Include="FileLoader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Source Files\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files\Old</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.hpp">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Acorn.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Old</Filter>
     </ClInclude>
-    <ClInclude Include="Room.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="World.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Application.hpp">
+      <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="FileLoader.hpp">
+      <Filter>Header Files\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.hpp">
+      <Filter>Header Files\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="World.hpp">
+      <Filter>Header Files\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.hpp">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.hpp">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="IObject.hpp">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

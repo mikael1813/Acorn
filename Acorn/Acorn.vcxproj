@@ -21,16 +21,24 @@
   <ItemGroup>
     <ClCompile Include="Acorn.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acorn.hpp" />
     <ClInclude Include="Application.hpp" />
+    <ClInclude Include="Engine.hpp" />
     <ClInclude Include="FileLoader.hpp" />
+    <ClInclude Include="GameObject.hpp" />
+    <ClInclude Include="IObject.hpp" />
     <ClInclude Include="Room.hpp" />
+    <ClInclude Include="TextureManager.hpp" />
+    <ClInclude Include="Transform.hpp" />
+    <ClInclude Include="Vector2D.hpp" />
     <ClInclude Include="World.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -90,8 +98,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\Acorn\Project\Acorn\SDL2-2.28.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Acorn\Project\Acorn\SDL2-2.28.5\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Acorn\Joc Acorn\Acorn\SDL2-2.28.5\include;D:\Acorn\Joc Acorn\Acorn\SDL2_image-2.8.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Acorn\Joc Acorn\Acorn\SDL2-2.28.5\lib\x64;D:\Acorn\Joc Acorn\Acorn\SDL2_image-2.8.2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -131,7 +139,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
