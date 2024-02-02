@@ -37,6 +37,21 @@
     <Filter Include="src\Animation">
       <UniqueIdentifier>{81b37a08-281d-4ecc-8072-65172b436016}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Inputs">
+      <UniqueIdentifier>{7cc16da6-44e3-4950-8e57-b63e44f7f0de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Timer">
+      <UniqueIdentifier>{cd3968e8-02de-477e-a92f-c03b12e09644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Map">
+      <UniqueIdentifier>{c33e96bd-57dc-4720-a933-da90e7736980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Camera">
+      <UniqueIdentifier>{f0f83ba4-25f2-40e7-8395-fd5481227971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Collision">
+      <UniqueIdentifier>{f359d3c7-83da-4f71-be26-70d08a06cb2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,6 +68,36 @@
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>src\Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>src\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="TileLayer.cpp">
+      <Filter>src\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\tinyxml-master\tinystr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\tinyxml-master\tinyxml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\tinyxml-master\tinyxmlerror.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\tinyxml-master\tinyxmlparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MapParser.cpp">
+      <Filter>src\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>src\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionHandler.cpp">
+      <Filter>src\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +129,42 @@
       <Filter>src\Animation</Filter>
     </ClInclude>
     <ClInclude Include="RigidBody.hpp">
+      <Filter>src\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.hpp">
+      <Filter>src\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.hpp">
+      <Filter>src\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.hpp">
+      <Filter>src\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.hpp">
+      <Filter>src\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TileLayer.hpp">
+      <Filter>src\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\tinyxml-master\tinystr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\tinyxml-master\tinyxml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapParser.hpp">
+      <Filter>src\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.hpp">
+      <Filter>src\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.hpp">
+      <Filter>src\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionHandler.hpp">
+      <Filter>src\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.hpp">
       <Filter>src\Physics</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,8 +2,15 @@
 #include "TextureManager.hpp"
 #include "Vector2D.hpp"
 #include "Transform.hpp"
+#include "Input.hpp"
+#include "Timer.hpp"
+#include "MapParser.hpp"
+#include "Camera.hpp"
+
+#include "SDL.h"
 
 Engine* Engine::s_Instance = nullptr;
+//MapParser* MapParser::s_Instance = nullptr;
 
 Engine::Engine() {
 
@@ -16,13 +23,15 @@ bool Engine::Init()
 		return false;
 	}
 
+	SDL_WindowFlags winddow_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+
 	m_Window = SDL_CreateWindow(
 		"Engine",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		SCREEN_WIDTH,
 		SCREEN_HEIGHT,
-		0);
+		winddow_flags);
 	if (m_Window == nullptr) {
 		SDL_Log("Failed to create Window: %s", SDL_GetError());
 		return false;
@@ -38,7 +47,14 @@ bool Engine::Init()
 		return false;
 	}
 
+	if (!MapParser::GetInstance()->Load()) {
+		SDL_Log("Failed to load map: %s", SDL_GetError());
+	}
+
+	m_LevelMap = MapParser::GetInstance()->GetMaps("map1");
+
 	TextureManager::GetInstance()->Load("acorn", "../Images/ghinda_radu.png");
+	TextureManager::GetInstance()->Load("tree", "../Images/copac.png");
 	player = new Acorn(new Properties("acorn", 200, 200, 32, 32));
 
 	/*Vector2D v1(1, 1), v2(2, -1), v3;
@@ -47,6 +63,8 @@ bool Engine::Init()
 
 	Transform tf;
 	tf.Log();*/
+
+	Camera::GetInstance()->SetTarget(player->GetOrigin());
 
 	m_IsRunning = true;
 	return true;
@@ -67,9 +85,12 @@ void Engine::Quit()
 	m_IsRunning = false;
 }
 
-void Engine::Update(float dt)
+void Engine::Update()
 {
-	player->Update(0.1);
+	float dt = Timer::GetInstance()->GetDeltaTime();
+	m_LevelMap->Update();
+	player->Update(dt);
+	Camera::GetInstance()->Update(dt);
 }
 
 void Engine::Render()
@@ -77,18 +98,23 @@ void Engine::Render()
 	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_Renderer);
 
+	TextureManager::GetInstance()->Draw("tree", 0, 0, 1280, 720);
+
+	m_LevelMap->Render();
 	player->Draw();
-	//TextureManager::GetInstance()->Draw("tree", 0, 0, 1280, 720);
+	
 	SDL_RenderPresent(m_Renderer);
 }
 
 void Engine::Events()
 {
-	SDL_Event event;
+	Input::GetInstance()->Listen();
+
+	/*SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type) {
 	case SDL_QUIT:
 		this->Quit();
 		break;
-	}
+	}*/
 }

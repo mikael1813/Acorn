@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "Acorn.hpp"
+#include "GameMap.hpp"
 
 constexpr int SCREEN_WIDTH = 1280;
 constexpr int SCREEN_HEIGHT = 720;
@@ -19,12 +20,12 @@ public:
 	void Quit();
 
 
-	void Update(float dt);
+	void Update();
 	void Render();
 	void Events();
 
+	inline GameMap* GetMap() const { return m_LevelMap; }
 	inline bool isRunning() { return m_IsRunning; }
-
 	inline SDL_Renderer* GetRenderer() { return m_Renderer; }
 
 
@@ -37,4 +38,5 @@ private:
 	static Engine* s_Instance;
 
 	Acorn* player;
+	GameMap* m_LevelMap;
 };

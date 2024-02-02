@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <crtdbg.h>
 #include "Engine.hpp"
+#include "Timer.hpp"
 
 //#undef main
 
@@ -20,8 +21,10 @@ int main(int argc, char* args[]) {
 
     while (Engine::GetInstance()->isRunning()) {
         Engine::GetInstance()->Events();
-        Engine::GetInstance()->Update(1);
+        Engine::GetInstance()->Update();
         Engine::GetInstance()->Render();
+
+        Timer::GetInstance()->Tick();
     }
 
     Engine::GetInstance()->Clean();
