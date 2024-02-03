@@ -15,6 +15,7 @@ Acorn::Acorn(Properties* props) : Character(props)
 	m_FallingTime = 0;
 
 	m_Bounciness = 0.2f;
+	m_TimePressedSpace = 0.0f;
 
 	m_IsGrounded = false;
 	m_IsJumping = false;
@@ -53,13 +54,16 @@ void Acorn::Update(float dt)
 		return;
 	}
 
+	SDL_Log("Delta time is %f", dt);
+
 	//m_RigidBody->UnSetForce();
 
-	bool PressedA = Input::GetInstance()->GetKeyDown(SDL_SCANCODE_A);
-	bool PressedD = Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D);
+	bool PressedA = Input::GetInstance()->GetKeyDown(SDL_SCANCODE_A) || Input::GetInstance()->GetKeyDown(SDL_SCANCODE_LEFT);
+	bool PressedD = Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D) || Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RIGHT);
 
 	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE)) {
 		m_PressedSpace = true;
+		m_TimePressedSpace += dt;
 	}
 
 	//if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_A) && m_IsGrounded) {
@@ -73,19 +77,34 @@ void Acorn::Update(float dt)
 	//}
 
 	if (m_PressedSpace && !Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE) && m_IsGrounded) {
-		if (PressedA && PressedD) {
-			m_RigidBody->ApplyForceY(-20, 5);
+
+		float scalar = 1.0f, scalar2 = 1.0f;
+		
+		if (m_TimePressedSpace < 10) {
+			scalar = 0.5f;
+			scalar2 = 1.25f;
 		}
-		else if (PressedA) {
-			m_RigidBody->ApplyForce(Vector2D(-10, -20), 5);
-		}
-		else if (PressedD) {
-			m_RigidBody->ApplyForce(Vector2D(10, -20), 5);
-		}
-		else {
-			m_RigidBody->ApplyForceY(-20, 5);
+		else if (m_TimePressedSpace < 20) {
+			scalar = 0.75f;
 		}
 
+		float vertical_force = -20 * scalar;
+		float horizontal_force = 10 * scalar * scalar2;
+
+		if (PressedA && PressedD) {
+			m_RigidBody->ApplyForceY(vertical_force, 5);
+		}
+		else if (PressedA) {
+			m_RigidBody->ApplyForce(Vector2D(-horizontal_force, vertical_force), 5);
+		}
+		else if (PressedD) {
+			m_RigidBody->ApplyForce(Vector2D(horizontal_force, vertical_force), 5);
+		}
+		else {
+			m_RigidBody->ApplyForceY(vertical_force, 5);
+		}
+
+		m_TimePressedSpace = 0.0f;
 		m_PressedSpace = false;
 	}
 

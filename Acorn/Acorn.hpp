@@ -25,6 +25,7 @@ private:
 	bool m_IsJumping;
 	bool m_IsGrounded;
 	bool m_PressedSpace;
+	float m_TimePressedSpace;
 
 	// value should be between 0 and 1
 	float m_Bounciness;
