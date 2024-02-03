@@ -42,39 +42,99 @@ void Acorn::Draw()
 
 }
 
+void Acorn::UpdateRigidBodyAndApplyCollisions(float dt) {
+
+	// move on X axis
+	m_RigidBody->Update(dt);
+	m_LastSafePosition.X = m_Transform->X;
+	m_Transform->TranslateX(m_RigidBody->GetPosition().X);
+	m_Collider->SetBox(m_Transform->X, m_Transform->Y, m_Width, m_Height);
+
+	CollisionType collision_x = CollisionHandler::GetInstance()->MapCollision(m_Collider->GetBox());
+
+	if (collision_x != CollisionType::NONE) {
+
+		// could add collision specific animation and sound
+
+		m_Transform->X = m_LastSafePosition.X;
+
+		m_RigidBody->InverseForceX(m_Bounciness);
+	}
+
+	//  move on Y axis
+	m_RigidBody->Update(dt);
+	m_LastSafePosition.Y = m_Transform->Y;
+	m_Transform->TranslateY(m_RigidBody->GetPosition().Y);
+	m_Collider->SetBox(m_Transform->X, m_Transform->Y, m_Width, m_Height);
+
+	CollisionType collision_y = CollisionHandler::GetInstance()->MapCollision(m_Collider->GetBox());
+
+	if (collision_y != CollisionType::NONE) {
+
+		// could add collision specific animation and sound
+
+		if (collision_y == CollisionType::DOWN) {
+			m_RigidBody->SetSurfaceFriction(10.0f);
+			m_IsGrounded = true;
+
+			// windows of time to press space
+			m_NumberOfTicksAfterGrounded = 5;
+		}
+
+		m_Transform->Y = m_LastSafePosition.Y;
+
+		m_RigidBody->InverseForceY(m_Bounciness);
+
+	}
+	else {
+		m_RigidBody->UnSetSurfaceFriction();
+		m_IsGrounded = false;
+	}
+}
+
 void Acorn::Update(float dt)
 {
+	// reduce window of time to press space
+	if (m_NumberOfTicksBeforeGrounded > 0) {
+		m_NumberOfTicksBeforeGrounded -= 1;
+	}	
+	if (m_NumberOfTicksAfterGrounded > 0) {
+		m_NumberOfTicksAfterGrounded -= 1;
+	}
+		
+
+	// idle animation
 	m_Animation->SetProps(m_TextureID, 0, 5, 300);
 
 	if (m_TimeToWait > 0) {
 		m_TimeToWait -= dt;
 
-		// idle animation
+		// crash animation
+
+		this->UpdateRigidBodyAndApplyCollisions(dt);
+
+		m_Animation->Update();
 
 		return;
 	}
 
-	//m_RigidBody->UnSetForce();
-
 	bool PressedA = Input::GetInstance()->GetKeyDown(SDL_SCANCODE_A) || Input::GetInstance()->GetKeyDown(SDL_SCANCODE_LEFT);
 	bool PressedD = Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D) || Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RIGHT);
 
-	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE) && m_IsGrounded) {
+	// spacebar pressed and player is grounded
+	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE) /*&& m_IsGrounded*/) {
+
+		// should add charging animation
+
+		// windows of time to press space
+		m_NumberOfTicksBeforeGrounded = 5;
+
 		m_PressedSpace = true;
 		m_TimePressedSpace += dt;
 	}
 
-	//if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_A) && m_IsGrounded) {
-	//	m_RigidBody->ApplyForceX(-3);
-	//	// can add animation here
-	//}
-
-	//if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D) && m_IsGrounded) {
-	//	m_RigidBody->ApplyForceX(3);
-	//	// can add animation here
-	//}
-
-	if (m_PressedSpace && !Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE) && m_IsGrounded) {
+	// spacebar released and player is grounded
+	if (m_PressedSpace && !Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE) && (m_IsGrounded || m_NumberOfTicksAfterGrounded > 0)) {
 
 		float scalar = 1.0f, scalar2 = 1.0f;
 		
@@ -85,7 +145,7 @@ void Acorn::Update(float dt)
 		else if (m_TimePressedSpace < 20) {
 			scalar = 0.75f;
 		}
-
+		
 		float vertical_force = -20 * scalar;
 		float horizontal_force = 10 * scalar * scalar2;
 
@@ -106,55 +166,26 @@ void Acorn::Update(float dt)
 		m_PressedSpace = false;
 	}
 
+	if (!Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE)) {
 
-	// move on X axis
-	m_RigidBody->Update(dt);
-	m_LastSafePosition.X = m_Transform->X;
-	m_Transform->TranslateX(m_RigidBody->GetPosition().X);
-	m_Collider->SetBox(m_Transform->X, m_Transform->Y, m_Width, m_Height);
-
-	CollisionType collision_x = CollisionHandler::GetInstance()->MapCollision(m_Collider->GetBox());
-
-	if (collision_x != CollisionType::NONE) {
-		
-		m_Transform->X = m_LastSafePosition.X;
-
-		m_RigidBody->InverseForceX(m_Bounciness);
-	}
-
-	//  move on Y axis
-	m_RigidBody->Update(dt);
-	m_LastSafePosition.Y = m_Transform->Y;
-	m_Transform->TranslateY(m_RigidBody->GetPosition().Y);
-	m_Collider->SetBox(m_Transform->X, m_Transform->Y, m_Width, m_Height);
-
-	CollisionType collision_y = CollisionHandler::GetInstance()->MapCollision(m_Collider->GetBox());
-
-	if (collision_y != CollisionType::NONE) {
-
-		if (collision_y == CollisionType::DOWN) {
-			m_RigidBody->SetSurfaceFriction(10.0f);
-			m_IsGrounded = true;
+		if (m_NumberOfTicksBeforeGrounded <= 0) {
+			m_PressedSpace = false;
+			m_TimePressedSpace = 0.0f;
 		}
-
-		m_Transform->Y = m_LastSafePosition.Y;
-
-		m_RigidBody->InverseForceY(m_Bounciness);
-		
-	}
-	else {
-		m_RigidBody->UnSetSurfaceFriction();
-		m_IsGrounded = false;
 	}
 
+	this->UpdateRigidBodyAndApplyCollisions(dt);
 
+	// falling time
 	if (!m_IsGrounded) {
 		m_FallingTime += dt;
 	}
 	else {
-		if (m_FallingTime > 100000.0f) {
+		// update time to wait if object fell for too long (crashed)
+		if (m_FallingTime > 100.0f) {
 			m_TimeToWait = 100.0f;
 		}
+		// reset falling time
 		m_FallingTime = 0;
 	}
 

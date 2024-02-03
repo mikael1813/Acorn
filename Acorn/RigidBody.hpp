@@ -59,11 +59,33 @@ public:
 	void Update(float dt) {
 		//Calculate air friction
 		Vector2D air_friction = m_Velocity * AIR_FRICTION;
-		Vector2D surface_friction = Vector2D(m_SurfaceFriction * GRAVITY, 0);
 
-		int all_forces_x = 0;
-		int all_forces_y = 0;
+		// apply forces to velocity
+		this->ApplyForcesToVelocity(dt);
 
+		// apply gravity
+		m_Velocity.Y = m_Velocity.Y + m_Gravity / m_Mass * dt;
+
+		// apply air friction
+		m_Velocity = m_Velocity - (air_friction  / m_Mass) * dt;
+
+		// apply surface friction
+		this->ApplySurfaceFriction(dt);
+
+		//m_Acceleration.X = (all_forces_x + m_Friction.X) /** SURFACE_FRICTION * 4*/ / m_Mass - air_friction.X / 2;
+
+		//m_Acceleration.Y = m_Gravity + all_forces_y / m_Mass - air_friction.Y;
+
+		//SDL_Log("Velocity: %f, %f", m_Velocity.X, m_Velocity.Y);
+
+		// Calculate position
+		m_Position = m_Velocity * dt;
+	}
+
+
+private:
+
+	void ApplyForcesToVelocity(float dt) {
 		// calculate velocity using all forces
 		for (auto& force : m_Forces) {
 
@@ -72,18 +94,18 @@ public:
 				deltaTimeUsed = dt;
 			}
 
-			m_Velocity = m_Velocity + (force.force * (1 / m_Mass)) * deltaTimeUsed;
-
-			//// Calculate acceleration
-			//all_forces_x += force.force.X;
-			////m_Acceleration.Y = m_Gravity + m_Force.Y / m_Mass;
-			//all_forces_y += force.force.Y;
+			m_Velocity = m_Velocity + (force.force / m_Mass) * deltaTimeUsed;
 
 			force.deltaTime -= dt;
 
 		}
 
-		// Remove forces that have been used
+		// remove forces that have been used (their deltaTime is now < 0)
+		this->DeleteUsedForces();
+	}
+
+	void DeleteUsedForces() {
+		// remove forces that have been used (their deltaTime is now < 0)
 		for (std::vector<Force>::iterator iter = m_Forces.begin(); iter != m_Forces.end(); ++iter)
 		{
 			if (iter->deltaTime <= 0)
@@ -92,11 +114,13 @@ public:
 				break;
 			}
 		}
+	}
 
-		m_Velocity.Y = m_Velocity.Y + m_Gravity * (1 / m_Mass) * dt;
+	void ApplySurfaceFriction(float dt) {
 
-		m_Velocity = m_Velocity - (air_friction * (1 / m_Mass)) * dt;
+		Vector2D surface_friction = Vector2D(m_SurfaceFriction * GRAVITY, 0);
 
+		// apply surface friction
 		if (m_Velocity.X > 0) {
 			m_Velocity.X = m_Velocity.X - surface_friction.X * (1 / m_Mass) * dt;
 			if (m_Velocity.X < 0) {
@@ -109,29 +133,6 @@ public:
 				m_Velocity.X = 0;
 			}
 		}
-
-		//m_Acceleration.X = (all_forces_x + m_Friction.X) /** SURFACE_FRICTION * 4*/ / m_Mass - air_friction.X / 2;
-
-		//m_Acceleration.Y = m_Gravity + all_forces_y / m_Mass - air_friction.Y;
-
-		// Calculate velocity
-		//m_Velocity = m_Velocity + m_Acceleration * dt;
-
-
-		//SDL_Log("Velocity: %f, %f", m_Velocity.X, m_Velocity.Y);
-
-		// Calculate position
-		m_Position = m_Velocity * dt;
-
-		//Calculate surface friction
-		//m_Velocity.X = m_Velocity.X - m_Velocity.X * m_SurfaceFriction;
-
-		//Calculate friction
-		//m_Velocity = m_Velocity - m_Velocity * m_Friction * dt;
-
-		// Calculate gravity
-		//m_Velocity.Y = m_Velocity.Y - m_Gravity * dt;
-
 	}
 
 private:

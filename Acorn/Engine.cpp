@@ -57,12 +57,6 @@ bool Engine::Init()
 	TextureManager::GetInstance()->Load("tree", "../Images/copac.png");
 	player = new Acorn(new Properties("acorn", 200, 200, 32, 32));
 
-	/*Vector2D v1(1, 1), v2(2, -1), v3;
-	v3 = v1 + v2;
-	v3.Log("V3: ");
-
-	Transform tf;
-	tf.Log();*/
 
 	Camera::GetInstance()->SetTarget(player->GetOrigin());
 

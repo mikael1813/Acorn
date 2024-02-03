@@ -19,8 +19,7 @@ public:
 	virtual void Clean();
 
 private:
-	/*int m_Row, m_Frame, m_FrameCount;
-	int m_AnimationSpeed;*/
+	void UpdateRigidBodyAndApplyCollisions(float dt);
 
 	bool m_IsJumping;
 	bool m_IsGrounded;
@@ -29,6 +28,9 @@ private:
 
 	// value should be between 0 and 1
 	float m_Bounciness;
+
+	int m_NumberOfTicksBeforeGrounded;
+	int m_NumberOfTicksAfterGrounded;
 
 	float m_JumpTime;
 	float m_JumpForce;

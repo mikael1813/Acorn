@@ -24,6 +24,11 @@ public:
 		return Vector2D(X * scalar, Y * scalar);
 	}
 
+	// division
+	inline Vector2D operator/(const float scalar) const {
+		return Vector2D(X / scalar, Y / scalar);
+	}
+
 	void Log(std::string msg = "") {
 		std::cout << msg << " (X Y) = (" << X << " " << Y << ") " << std::endl;
 	}
