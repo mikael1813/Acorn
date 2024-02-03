@@ -54,14 +54,12 @@ void Acorn::Update(float dt)
 		return;
 	}
 
-	SDL_Log("Delta time is %f", dt);
-
 	//m_RigidBody->UnSetForce();
 
 	bool PressedA = Input::GetInstance()->GetKeyDown(SDL_SCANCODE_A) || Input::GetInstance()->GetKeyDown(SDL_SCANCODE_LEFT);
 	bool PressedD = Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D) || Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RIGHT);
 
-	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE)) {
+	if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_SPACE) && m_IsGrounded) {
 		m_PressedSpace = true;
 		m_TimePressedSpace += dt;
 	}
