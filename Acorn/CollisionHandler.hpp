@@ -6,6 +6,14 @@
 #include "TileLayer.hpp"
 #include "GameMap.hpp"
 
+enum class CollisionType {
+	NONE,
+	LEFT,
+	RIGHT,
+	DOWN,
+	UP
+};
+
 
 class CollisionHandler {
 public:
@@ -14,7 +22,7 @@ public:
 	}
 
 	bool CheckCollision(SDL_Rect a, SDL_Rect b);
-	bool MapCollision(SDL_Rect a);
+	CollisionType MapCollision(SDL_Rect a);
 
 private:
 	CollisionHandler();

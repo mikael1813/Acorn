@@ -24,9 +24,15 @@ private:
 
 	bool m_IsJumping;
 	bool m_IsGrounded;
+	bool m_PressedSpace;
+
+	// value should be between 0 and 1
+	float m_Bounciness;
 
 	float m_JumpTime;
 	float m_JumpForce;
+	float m_FallingTime;
+	float m_TimeToWait;
 
 	Collider* m_Collider;
 	Animation* m_Animation;
