@@ -138,13 +138,19 @@ void Acorn::Update(float dt)
 
 		float scalar = 1.0f, scalar2 = 1.0f;
 		
-		if (m_TimePressedSpace < 10) {
+		/*if (m_TimePressedSpace < 10) {
 			scalar = 0.5f;
 			scalar2 = 1.25f;
 		}
 		else if (m_TimePressedSpace < 20) {
 			scalar = 0.75f;
+		}*/
+
+		if (m_TimePressedSpace > 30) {
+			m_TimePressedSpace = 30;
 		}
+
+		scalar = m_TimePressedSpace / 30;
 		
 		float vertical_force = -20 * scalar;
 		float horizontal_force = 10 * scalar * scalar2;
